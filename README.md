@@ -68,17 +68,13 @@ It took about 40 minutes to create my cluster. Since I'll create this cluster ag
 
 ---
 
-## Introducing Today's Project!
+## Part 2
 
-In this project, I will prepare a backend app for Kubernetes deployment. This is because Kubernetes deployment requires apps to be containerized and for there to be a container image. This project will get us to create that container image.
+In this Section, I will prepare a backend app for Kubernetes deployment. This is because Kubernetes deployment requires apps to be containerized and for there to be a container image. This project will get us to create that container image.
 
 ### Tools and concepts
 
 'I used Amazon EKS, Git, Docker, and Amazon ECR to prepare a backend app for deployment with Kubernetes. This involved setting up an EKS cluster, cloning code from GitHub, building and pushing a docker image to Amazon ECR.
-
-### Project reflection
-
-This project took me approximately 1hours. The most challenging part was running into the AWS CLI errors in the begining. I had make sure the Linux environment was perfectly set up to interact with Docker and AWS services like EKS and ECR.
 
 Something new that I learnt from this experience was how to properly set up the AWS CLI to run linux commands that help streamline my Kubernetes cluster deployment.
 
@@ -86,7 +82,7 @@ Something new that I learnt from this experience was how to properly set up the 
 
 ## What I'm deploying
 
-To set up this project, I launched a Kubernetes cluster. Steps I took to do this included launching an EC2 instance, installing "eksctl" by running the command, and modifying the IAM Role for my instance so that it has "AdministratorAccess". 
+To set up this section, I launched a Kubernetes cluster. Steps I took to do this included launching an EC2 instance, installing "eksctl" by running the command, and modifying the IAM Role for my instance so that it has "AdministratorAccess". 
 
 ### I'm deploying an app's backend
 
@@ -139,23 +135,18 @@ The app.py file contains three main parts: installing dependencies, formatting t
 
 ---
 
-## Introducing Today's Project!
-
-In this project, I will set up manifest files because they are a key part of the Kubernetes deployment process. Manifest files give Kubernetes the instructions on HOW it should deploy the containerized application.
+In this section, I will set up manifest files because they are a key part of the Kubernetes deployment process. Manifest files give Kubernetes the instructions on HOW it should deploy the containerized application.
 
 ### Tools and concepts
 
 I used Amazon EKS, eksctl, Git, Docker, ECR to create a Kubernetes cluster and build the container image of the backend of an app to deploy. Key concepts include using Manifest files, Deployments and Services to get ready for a Kubernetes deployment.
 
-### Project reflection
-
-need a job
 
 This project took me approximately 2 hours including documentation. The most challenging part was understanding the deployment manifest. My favourite part was also being able to set up manifests files and understand how they work together.
 
 ---
 
-## Project Set Up
+## Part 3
 
 ### Kubernetes cluster
 
