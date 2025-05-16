@@ -189,7 +189,7 @@ One part of the Deployment manifest I still want to know more about is the names
 
 ## Deploy Backend with Kubernetes
 
-![Image](http://learn.nextwork.org/ecstatic_beige_calm_tarapirohe/uploads/aws-compute-eks4_6cfb382f2)
+![Image](https://github.com/GilbertEmodi/Kubernetes/blob/main/architecture-complete%20kubernetes%20pt%204.png)
 
 ---
 
@@ -223,7 +223,7 @@ To deploy my backend application, I applied the manifest files that I created. A
 
 ## Verifying Deployment
 
-My extension for this project is to use the EKS console to verify the deployment. I had to set up IAM access policies because I didn't have access to see the cluster's nodes by default. I set up access by running the "iamidentitymapping" command.
+The final step is to use the EKS console to verify the deployment. I had to set up IAM access policies because I didn't have access to see the cluster's nodes by default. I set up access by running the "iamidentitymapping" command.
 
 Once I accessed my cluster's nodes, I discovered pods running inside each node. Pods are the smallest deployable unit and represent bundles of containers. Containers in a pod share networking and storage resources, making the app run efficiently.
 
