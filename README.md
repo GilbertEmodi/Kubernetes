@@ -1,4 +1,4 @@
-# Launch a Kubernetes Cluster
+# Kubernetes Deployment in AWS
 
 **Author:** Gilbert Emodi  
 **Email:** zemodi99@gmail.com
@@ -9,11 +9,9 @@
 
 ---
 
-## Introducing Today's Project!
-
-In this project, I will deploy a Kubernetes cluster ising Amazon EKS. EKS is AWS' service for deploying Kubernetes in the cloud. I will also be using exploring "eksctl" and CloudFormation
-
 ### What is Amazon EKS?
+
+In this first section of the project, I will deploy a Kubernetes cluster using Amazon EKS. EKS is AWS' service for deploying Kubernetes in the cloud. I will also be using exploring "eksctl" and CloudFormation
 
 Amazon EKS is AWS' cloud Kubernetes service, which means it simplifies managing and orchestration of Kubernetes clusters. I used it in today's project to create a Kubernetes cluster.
 
@@ -21,20 +19,16 @@ Amazon EKS is AWS' cloud Kubernetes service, which means it simplifies managing 
 
 One thing I didn't expect in this project was seeing how eksctl wasn't already installed on the EC2 instance, but using it was well worth it. It simplified resource creation in comparison to using just the AWS CLI commands.
 
-### This project took me...
-
-This project took almost 2 hours to complete. The part that took the longest was the setup (downloading eksctl, and waiting for it to fully create the cluster environment.
-
 ---
 
 ## What is Kubernetes?
 
 Kubernetes is a tool for container orchestration. Companies and developers use Kubernetes to deploy and manage large scale containerized applications.
 
-I used eksctl to create a Kubernetes cluster using the command line. The "eksctl create cluster" command line I ran defined the name of the cluster, its node group's name, and node size settings. I also defined the region and the EC2 instance type.
+I used "eksctl" to create a Kubernetes cluster using the command line. The "eksctl create cluster" command line I ran defined the name of the cluster, its node group's name, and node size settings. I also defined the region and the EC2 instance type.
 
 I initially ran into 2 errors while using eksctl. The first one was because of not having installed eksctl yet.
-The second one was because the EC2 instance didn't have permission to our AWS account and services yet.
+The second one was because the EC2 instance didn't have permission to our AWS account and services yet. I solved that issue by assigning an IAM role to the EC2 Instance.
 
 ![Image](https://github.com/GilbertEmodi/Launch-Kubernetes-Cluster-part1-/blob/main/1-eksctl%20not%20found.JPG)
 
@@ -59,8 +53,6 @@ It took about 40 minutes to create my cluster. Since I'll create this cluster ag
 ![Image](https://github.com/GilbertEmodi/Launch-Kubernetes-Cluster-part1-/blob/main/3-Nodes.JPG)
 
 ---
-
----
 # Set Up Kubernetes Deployment
 ---
 
@@ -70,7 +62,7 @@ It took about 40 minutes to create my cluster. Since I'll create this cluster ag
 
 ## Part 2
 
-In this Section, I will prepare a backend app for Kubernetes deployment. This is because Kubernetes deployment requires apps to be containerized and for there to be a container image. This project will get us to create that container image.
+In this Section, I will prepare a backend app for Kubernetes deployment. This is because Kubernetes deployment requires apps to be containerized and for there to be a container image. This part of the project will get us to create that container image.
 
 ### Tools and concepts
 
@@ -114,7 +106,7 @@ Container registries like Amazon ECR are great for Kubernetes deployment because
 
 ---
 
-## EXTRA: Backend Explained
+## Backend Explained
 
 After reviewing the app's backend code, I've learned that the app functions by extracting data from another API, but we also have our own API in "app.py" that's responsible for others wanting access to our service.
 
@@ -125,8 +117,6 @@ The requirements.txt file lists all the dependencies and libraries that every co
 The Dockerfile sets up the instructions that tell Docker how it should build a container image of your backend app. It includes commands on where it can find a list of all dependencies to install (requirements.txt) and commands that automatically run
 
 The app.py file contains three main parts: installing dependencies, formatting the data into JSON data, passing the formatted data back to the user/requester.
-
----
 
 ---
 # Create Kubernetes Manifests
@@ -141,16 +131,13 @@ In this section, I will set up manifest files because they are a key part of the
 
 I used Amazon EKS, eksctl, Git, Docker, ECR to create a Kubernetes cluster and build the container image of the backend of an app to deploy. Key concepts include using Manifest files, Deployments and Services to get ready for a Kubernetes deployment.
 
-
-This project took me approximately 2 hours including documentation. The most challenging part was understanding the deployment manifest. My favourite part was also being able to set up manifests files and understand how they work together.
+My favourite part was also being able to set up manifests files and understand how they work together.
 
 ---
 
-## Part 3
+## Set-Up (Previous Steps)
 
-### Kubernetes cluster
-
-To set up today's project, I launched a Kubernetes cluster. Steps I took to do this included granting the EC2 instance permissions with IAM, and installing the eksctl command line tool. I created the cluster using the "eksctl" create command.
+In the previous sections, I launched a Kubernetes cluster. Steps I took to do this included granting the EC2 instance permissions with IAM, and installing the eksctl command line tool. I created the cluster using the "eksctl" create command.
 
 ### Backend code
 
@@ -164,7 +151,7 @@ I also pushed the container image to a container registry, because this helps es
 
 ---
 
-## Manifest files
+## Manifest files (Part 3)
 
 Kubernetes manifests are instructions for Kubernetes on how it should deploy the app. Manifests are helpful because they reduce manual work when we're wanting to deploy and manage applications across multiple containers (clusters).
 
@@ -196,4 +183,55 @@ One part of the Deployment manifest I still want to know more about is the names
 
 ---
 
+# Deploy Backend with Kubernetes
+
 ---
+
+## Deploy Backend with Kubernetes
+
+![Image](http://learn.nextwork.org/ecstatic_beige_calm_tarapirohe/uploads/aws-compute-eks4_6cfb382f2)
+
+---
+
+In this final section of the project, I will finally deploy the backend of an application with Kubernetes.
+
+---
+
+## Manifest files
+
+Kubernetes Manifests are the instruction manuals on how I'd like Kubernetes to to deploy, expose, and run the containerized application. Manifests are helpful because it allows Kubernetes to repeat a deployment using the same instructions.
+
+A Deployment manifest manages the creation of a Deployment resource that's responsible for creating containers/rolling out updates across the EKS cluster. The container image URL in my deployment manifest tells Kubernetes where my image is.
+
+A Service exposes a deployed application to users/traffic. My service manifest sets up a Service resource that exposes the backend application at port 8080 within the EKS cluster. 
+
+![Image](http://learn.nextwork.org/ecstatic_beige_calm_tarapirohe/uploads/aws-compute-eks4_b01876554)
+
+---
+
+## Backend Deployment!
+
+To deploy my backend application, I applied the manifest files that I created. Applying a manifest file means giving Kubernetes the templates for creating the Deployment and Services Resources to deploy & expose the application
+
+### kubectl
+
+"kubectl" is the command line tool for managing resources inside the cluster. I need this tool to deploy the application by creating the Deployment/Service resources. I can't use "eksctl" for the job because that tool is for creating the cluster.
+
+![Image](http://learn.nextwork.org/ecstatic_beige_calm_tarapirohe/uploads/aws-compute-eks4_6cfb382f2)
+
+---
+
+## Verifying Deployment
+
+My extension for this project is to use the EKS console to verify the deployment. I had to set up IAM access policies because I didn't have access to see the cluster's nodes by default. I set up access by running the "iamidentitymapping" command.
+
+Once I accessed my cluster's nodes, I discovered pods running inside each node. Pods are the smallest deployable unit and represent bundles of containers. Containers in a pod share networking and storage resources, making the app run efficiently.
+
+The EKS console shows the events for each pod, where I could see the container image getting pulled and getting used to create a new container running the backend application. This validated that the deployment was a success, the backend is runnining
+
+![Image](http://learn.nextwork.org/ecstatic_beige_calm_tarapirohe/uploads/aws-compute-eks4_3b391f873)
+
+---
+
+---
+
